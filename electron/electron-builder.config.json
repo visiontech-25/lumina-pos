@@ -1,0 +1,32 @@
+{
+  "appId": "com.lumina.pos.pro",
+  "productName": "Lumina Pro POS",
+  "directories": {
+    "buildResources": "resources"
+  },
+  "files": [
+    "assets/**/*",
+    "build/**/*",
+    "capacitor.config.*",
+    "app/**/*"
+  ],
+  "nsis": {
+    "allowElevation": true,
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true
+  },
+  "win": {
+    "target": "nsis",
+    "icon": "assets/appIcon.png"
+  },
+  "mac": {
+    "category": "public.app-category.business",
+    "target": "dmg",
+    "icon": "assets/appIcon.png"
+  },
+  "linux": {
+    "target": "AppImage",
+    "icon": "assets/appIcon.png",
+    "category": "Office"
+  }
+}

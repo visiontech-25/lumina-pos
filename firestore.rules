@@ -1,0 +1,124 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // User authentication required for all access
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // storeId is embedded in path: /stores/{storeId}/...
+    function storeId() {
+      return resource.data.storeId != null ? resource.data.storeId : request.resource.data.storeId;
+    }
+
+    function isStoreMember(storeId) {
+      // userIndex maps auth.uid -> storeId
+      return exists(/databases/$(database)/documents/userIndex/$(request.auth.uid))
+             && get(/databases/$(database)/documents/userIndex/$(request.auth.uid)).data.storeId == storeId;
+    }
+
+    function userProfile(storeId) {
+      return get(/databases/$(database)/documents/stores/$(storeId)/users/$(request.auth.uid));
+    }
+
+    function hasRole(storeId, role) {
+      return isSignedIn()
+             && isStoreMember(storeId)
+             && userProfile(storeId).data.role == role;
+    }
+
+    function hasPermission(storeId, perm) {
+      return isSignedIn()
+             && isStoreMember(storeId)
+             && (userProfile(storeId).data.permissions[perm] == true
+                 || userProfile(storeId).data.role == 'admin');
+    }
+
+    // Store root document: allow authenticated owner to create their store doc once.
+    match /stores/{storeId} {
+      allow read: if isSignedIn() && isStoreMember(storeId);
+      allow create: if isSignedIn()
+                    && request.resource.data.id == storeId
+                    && request.resource.data.ownerUid == request.auth.uid;
+      // lock down updates/deletes to admins after membership exists
+      allow update: if hasRole(storeId, 'admin') || hasPermission(storeId, 'canManageSettings');
+      allow delete: if false;
+    }
+
+    // Products, suppliers, inventory operations
+    match /stores/{storeId}/products/{docId} {
+      allow read: if isSignedIn() && isStoreMember(storeId);
+      allow write: if hasPermission(storeId, 'canManageInventory');
+    }
+
+    match /stores/{storeId}/suppliers/{docId} {
+      allow read: if isSignedIn() && isStoreMember(storeId);
+      allow write: if hasPermission(storeId, 'canManageInventory');
+    }
+
+    // Sales and fiscal events
+    match /stores/{storeId}/sales/{docId} {
+      allow read: if isSignedIn() && isStoreMember(storeId);
+      allow write: if isSignedIn() && isStoreMember(storeId);
+    }
+
+    match /stores/{storeId}/events/{docId} {
+      allow read: if isSignedIn() && isStoreMember(storeId);
+      allow create: if isSignedIn() && isStoreMember(storeId);
+      // No updates/deletes to keep ledger immutable
+      allow update, delete: if false;
+    }
+
+    // Prospects
+    match /stores/{storeId}/prospects/{docId} {
+      allow read: if isSignedIn() && isStoreMember(storeId);
+      allow write: if hasPermission(storeId, 'canManageProspects');
+    }
+
+    // Users & settings
+    match /stores/{storeId}/users/{docId} {
+      allow read: if isSignedIn() && isStoreMember(storeId);
+      allow write: if hasRole(storeId, 'admin') || (request.auth.uid == docId);
+    }
+
+    match /stores/{storeId}/settings/{docId} {
+      allow read: if isSignedIn() && isStoreMember(storeId);
+      allow write: if hasRole(storeId, 'admin') || hasPermission(storeId, 'canManageSettings');
+    }
+
+    // Customers & loyalty (clienteling / purchase history)
+    match /stores/{storeId}/customers/{docId} {
+      allow read: if isSignedIn() && isStoreMember(storeId);
+      allow write: if isSignedIn() && isStoreMember(storeId);
+    }
+    match /stores/{storeId}/loyalty/{docId} {
+      allow read: if isSignedIn() && isStoreMember(storeId);
+      allow write: if isSignedIn() && isStoreMember(storeId);
+    }
+
+    match /stores/{storeId}/auditLogs/{docId} {
+      allow read, write: if isSignedIn() && isStoreMember(storeId);
+    }
+    match /stores/{storeId}/restaurantSections/{docId} {
+      allow read, write: if isSignedIn() && isStoreMember(storeId);
+    }
+    match /stores/{storeId}/restaurantTables/{docId} {
+      allow read, write: if isSignedIn() && isStoreMember(storeId);
+    }
+    match /stores/{storeId}/restaurantOrders/{docId} {
+      allow read, write: if isSignedIn() && isStoreMember(storeId);
+    }
+
+    // Meta collections (e.g. receipt counters)
+    match /stores/{storeId}/meta/{docId} {
+      allow read, write: if isSignedIn() && isStoreMember(storeId);
+    }
+
+    // User index: each auth.uid maps to a storeId
+    match /userIndex/{uid} {
+      allow read, write: if isSignedIn() && request.auth.uid == uid;
+    }
+  }
+}
+

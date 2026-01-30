@@ -1,0 +1,74 @@
+{
+  "name": "lumina-pro-pos",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "vite preview",
+    "clean": "rimraf node_modules package-lock.json dist",
+    "clean:install": "npm run clean && npm install",
+    "audit:fix": "npm audit fix --force",
+    "audit:check": "npm audit",
+    "cap:init": "npx cap init",
+    "cap:sync": "npx cap sync",
+    "cap:add:ios": "npx cap add ios",
+    "cap:add:android": "npx cap add android",
+    "cap:open:ios": "npx cap open ios",
+    "cap:open:android": "npx cap open android",
+    "android:build": "npm run build && npx cap sync android && npx cap open android",
+    "update:packages": "powershell -ExecutionPolicy Bypass -File ./update-packages.ps1"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/app": "^6.0.3",
+    "@capacitor/browser": "^6.0.6",
+    "@capacitor/camera": "^6.0.1",
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/haptics": "^6.0.3",
+    "@capacitor/ios": "^6.1.2",
+    "@capacitor/splash-screen": "^6.0.1",
+    "@capacitor/status-bar": "^6.0.1",
+    "@capacitor/toast": "^6.0.4",
+    "@capgo/capacitor-native-biometric": "^6.0.4",
+    "@google/genai": "^1.38.0",
+    "@types/react-router-dom": "^5.3.3",
+    "firebase": "^11.0.1",
+    "lucide-react": "^0.468.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-is": "^18.3.1",
+    "react-router-dom": "^7.13.0",
+    "recharts": "^3.5.0"
+  },
+  "devDependencies": {
+    "@capacitor-community/electron": "^5.0.1",
+    "@capacitor/cli": "^6.1.2",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "rimraf": "^6.0.1",
+    "tailwindcss": "^3.4.14",
+    "terser": "^5.36.0",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "overrides": {
+    "node-domexception": "^1.0.0",
+    "tmp": "^0.2.3",
+    "xml2js": "^0.6.2",
+    "inquirer": "^9.2.12"
+  },
+  "resolutions": {
+    "tmp": "^0.2.3",
+    "xml2js": "^0.6.2"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Lumina Retail POS",
+  "description": "A high-performance retail point-of-sale system featuring smart inventory management, real-time sales reporting, invoice generation, and AI-driven business insights.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

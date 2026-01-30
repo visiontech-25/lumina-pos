@@ -1,0 +1,101 @@
+{
+  "project_info": {
+    "project_number": "853455182622",
+    "firebase_url": "https://aquasavvy-cde64-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "aquasavvy-cde64",
+    "storage_bucket": "aquasavvy-cde64.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:853455182622:android:8f0bb88136497b5638470f",
+        "android_client_info": {
+          "package_name": "com.aquasavvy.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "853455182622-fiivj40qkou8m1s4hqi1saihctigc58v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aquasavvy.app",
+            "certificate_hash": "20b86dc3ac99ca53fa3230ef27b509541cbfa1a9"
+          }
+        },
+        {
+          "client_id": "853455182622-mua33att6mktgbqrl1mea4t9nefub9jg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aquasavvy.app",
+            "certificate_hash": "6cd59124b5e4ce21953640ac5fb69e2b5f16e4bb"
+          }
+        },
+        {
+          "client_id": "853455182622-rkr7n5t5v09ktm19nephq0oqblmuknd6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq3sQiXnia76YK8SOEARmEuvDkdJvnICs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "853455182622-rkr7n5t5v09ktm19nephq0oqblmuknd6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:853455182622:android:14d7d1b3e179221738470f",
+        "android_client_info": {
+          "package_name": "com.lumina.pos.pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "853455182622-7l6muk0p4jjik6n25tj90rclh070hi3d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lumina.pos.pro",
+            "certificate_hash": "20b86dc3ac99ca53fa3230ef27b509541cbfa1a9"
+          }
+        },
+        {
+          "client_id": "853455182622-84f5qoffh50qnmjmfrlu2a2fv2v67od0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lumina.pos.pro",
+            "certificate_hash": "6cd59124b5e4ce21953640ac5fb69e2b5f16e4bb"
+          }
+        },
+        {
+          "client_id": "853455182622-rkr7n5t5v09ktm19nephq0oqblmuknd6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq3sQiXnia76YK8SOEARmEuvDkdJvnICs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "853455182622-rkr7n5t5v09ktm19nephq0oqblmuknd6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
