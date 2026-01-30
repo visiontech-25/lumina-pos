@@ -17,6 +17,38 @@ dist-ssr
 .env.local
 .env.*.local
 
+# Security and sensitive files - PROTECT PRIVACY
+*.keystore
+*.p12
+*.p8
+*.pem
+*.key
+*.crt
+google-services.json
+GoogleService-Info.plist
+firebase.json
+firestore.rules
+keystore.properties
+android/keystore.properties
+android/app/google-services.json
+
+# Build outputs
+*.apk
+*.aab
+*.ipa
+*.exe
+*.dmg
+*.pkg
+*.deb
+*.rpm
+electron/dist/
+android/app/build/
+android/app/release/
+
+# Capacitor
+android/.gradle/
+ios/build/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
